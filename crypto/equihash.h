@@ -196,7 +196,7 @@ public:
 
 #include "equihash.tcc"
 
-static Equihash<144.5> Eh144_5;
+static Equihash<144,5> Eh144_5;
 static Equihash<96,3> Eh96_3;
 static Equihash<200,9> Eh200_9;
 static Equihash<96,5> Eh96_5;
