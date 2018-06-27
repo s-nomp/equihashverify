@@ -1,6 +1,7 @@
 // Copyright (c) 2016 Jack Grigg
 // Copyright (c) 2016 The Zcash developers
 // Copyright (c) 2017-2018 The LitecoinZ developers
+// Copyright (c) 2017-2018 The BitcoinZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -767,18 +768,6 @@ bool Equihash<N,K>::IsValidSolution(const eh_HashState& base_state, std::vector<
     assert(X.size() == 1);
     return X[0].IsZero(hashLen);
 }
-
-// Explicit instantiations for Equihash<144,5>
-template int Equihash<144,5>::InitialiseState(eh_HashState& base_state);
-#ifdef ENABLE_MINING
-template bool Equihash<144,5>::BasicSolve(const eh_HashState& base_state,
-                                         const std::function<bool(std::vector<unsigned char>)> validBlock,
-                                         const std::function<bool(EhSolverCancelCheck)> cancelled);
-template bool Equihash<144,5>::OptimisedSolve(const eh_HashState& base_state,
-                                             const std::function<bool(std::vector<unsigned char>)> validBlock,
-                                             const std::function<bool(EhSolverCancelCheck)> cancelled);
-#endif
-template bool Equihash<144,5>::IsValidSolution(const eh_HashState& base_state, std::vector<unsigned char> soln);
 
 
 // Explicit instantiations for Equihash<96,3>
