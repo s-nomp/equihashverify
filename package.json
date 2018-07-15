@@ -1,6 +1,6 @@
 {
   "name": "equihashverify",
-  "version": "0.0.2",
+  "version": "0.0.9",
   "description": "function to check whether an Equihash solution is valid",
   "main": "equihashverify",
   "scripts": {
@@ -9,21 +9,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ZencashOfficial/equihashverify"
+    "url": "https://github.com/z-nomp/equihashverify"
   },
   "keywords": [
-    "zencash"
+    "equihash",
+    "equihashverify"
   ],
-  "author": "Joseph Nicholas R. Alcantara",
+  "author": "z-nomp developers",
   "contributors": [
     "Alberto Garoffolo",
-    "cronic"
+    "cronic",
+    "egyptianbman"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ZencashOfficial/equihashverify/issues"
+    "url": "https://github.com/z-nomp/equihashverify/issues"
   },
-  "homepage": "https://github.com/ZencashOfficial/equihashverify",
+  "homepage": "https://github.com/z-nomp/equihashverify",
   "dependencies": {
     "bindings": "*",
     "libsodium": "^0.7.3",
