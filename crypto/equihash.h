@@ -296,25 +296,4 @@ inline bool EhOptimisedSolveUncancellable(unsigned int n, unsigned int k, const 
         throw std::invalid_argument("Unsupported Equihash parameters"); \
     }
 
-inline unsigned int EhSolutionWidth(int n, int k)
-{
-    unsigned int ret;
-    if (n == 96 && k == 3) {
-        ret = Eh96_3.SolutionWidth;
-    } else if (n == 200 && k == 9) {
-        ret = Eh200_9.SolutionWidth;
-    } else if (n == 144 && k == 5) {
-        ret = Eh144_5.SolutionWidth;
-    } else if (n == 192 && k == 7) {
-        ret = Eh192_7.SolutionWidth;
-    } else if (n == 96 && k == 5) {
-        ret = Eh96_5.SolutionWidth;
-    } else if (n == 48 && k == 5) {
-        ret = Eh48_5.SolutionWidth;
-    } else {
-        throw std::invalid_argument("Unsupported Equihash parameters");
-    }
-    return ret;
-}
-
 #endif // BITCOIN_EQUIHASH_H
