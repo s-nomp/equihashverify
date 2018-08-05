@@ -1,6 +1,6 @@
 {
   "name": "equihashverify",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "function to check whether an Equihash solution is valid",
   "main": "equihashverify",
   "scripts": {
@@ -19,7 +19,9 @@
   "contributors": [
     "Alberto Garoffolo",
     "cronic",
-    "egyptianbman"
+    "egyptianbman",
+	"nettts",
+    "LitecoinZ",
   ],
   "license": "MIT",
   "bugs": {
