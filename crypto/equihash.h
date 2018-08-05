@@ -205,7 +205,6 @@ static Equihash<144,5> Eh144_5;
 static Equihash<192,7> Eh192_7;
 
 #define EhInitialiseState(n, k, base_state, personalizationString)  \
-
     if (n == 96 && k == 3) {                 \
         Eh96_3.InitialiseState(base_state, personalizationString);  \
     } else if (n == 200 && k == 9) {         \
