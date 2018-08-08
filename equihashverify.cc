@@ -21,8 +21,8 @@ int verifyEH(const char *hdr, const std::vector<unsigned char> &soln, const char
 
     bool isValid;
     EhIsValidSolution(N, K, state, soln, isValid);
-
-    return isValid;
+  
+	return isValid;
 }
 
 void Verify(const v8::FunctionCallbackInfo<Value>& args) {

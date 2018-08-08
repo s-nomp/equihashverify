@@ -1,5 +1,8 @@
 // Copyright (c) 2016 Jack Grigg
 // Copyright (c) 2016 The Zcash developers
+// Copyright (c) 2017-2018 The LitecoinZ developers
+// Copyright (c) 2017-2018 The BitcoinZ developers
+// Copyright (c) 2018 The z-nomp developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -18,12 +21,13 @@
 
 #include "crypto/common.h"
 #include "crypto/equihash.h"
+#include "../util.h"
+
 #include <algorithm>
 #include <iostream>
 #include <stdexcept>
 
 #include <boost/optional.hpp>
-#include "../util.h"
 
 EhSolverCancelledException solver_cancelled;
 
@@ -718,12 +722,10 @@ invalidsolution:
 }
 #endif // ENABLE_MINING
 
-
-
 template<unsigned int N, unsigned int K>
 bool Equihash<N,K>::IsValidSolution(const eh_HashState& base_state, std::vector<unsigned char> soln)
 {
-	if (soln.size() != SolutionWidth) {
+    if (soln.size() != SolutionWidth) {
         LogPrint("pow", "Invalid solution length: %d (expected %d)\n",
                  soln.size(), SolutionWidth);
         return false;
@@ -768,31 +770,6 @@ bool Equihash<N,K>::IsValidSolution(const eh_HashState& base_state, std::vector<
     return X[0].IsZero(hashLen);
 }
 
-// Explicit instantiations for Equihash<144,5>
-template int Equihash<144,5>::InitialiseState(eh_HashState& base_state, const char* personalizationString);
-#ifdef ENABLE_MINING
-template bool Equihash<144,5>::BasicSolve(const eh_HashState& base_state,
-                                         const std::function<bool(std::vector<unsigned char>)> validBlock,
-                                         const std::function<bool(EhSolverCancelCheck)> cancelled);
-template bool Equihash<144,5>::OptimisedSolve(const eh_HashState& base_state,
-                                             const std::function<bool(std::vector<unsigned char>)> validBlock,
-                                             const std::function<bool(EhSolverCancelCheck)> cancelled);
-#endif
-template bool Equihash<144,5>::IsValidSolution(const eh_HashState& base_state, std::vector<unsigned char> soln);
-
-
-// Explicit instantiations for Equihash<96,3>
-template int Equihash<96,3>::InitialiseState(eh_HashState& base_state, const char* personalizationString);
-#ifdef ENABLE_MINING
-template bool Equihash<96,3>::BasicSolve(const eh_HashState& base_state,
-                                         const std::function<bool(std::vector<unsigned char>)> validBlock,
-                                         const std::function<bool(EhSolverCancelCheck)> cancelled);
-template bool Equihash<96,3>::OptimisedSolve(const eh_HashState& base_state,
-                                             const std::function<bool(std::vector<unsigned char>)> validBlock,
-                                             const std::function<bool(EhSolverCancelCheck)> cancelled);
-#endif
-template bool Equihash<96,3>::IsValidSolution(const eh_HashState& base_state, std::vector<unsigned char> soln);
-
 // Explicit instantiations for Equihash<200,9>
 template int Equihash<200,9>::InitialiseState(eh_HashState& base_state, const char* personalizationString);
 #ifdef ENABLE_MINING
@@ -805,6 +782,30 @@ template bool Equihash<200,9>::OptimisedSolve(const eh_HashState& base_state,
 #endif
 template bool Equihash<200,9>::IsValidSolution(const eh_HashState& base_state, std::vector<unsigned char> soln);
 
+// Explicit instantiations for Equihash<144,5>
+template int Equihash<144,5>::InitialiseState(eh_HashState& base_state, const char* personalizationString);
+#ifdef ENABLE_MINING
+template bool Equihash<144,5>::BasicSolve(const eh_HashState& base_state,
+                                          const std::function<bool(std::vector<unsigned char>)> validBlock,
+                                          const std::function<bool(EhSolverCancelCheck)> cancelled);
+template bool Equihash<144,5>::OptimisedSolve(const eh_HashState& base_state,
+                                              const std::function<bool(std::vector<unsigned char>)> validBlock,
+                                              const std::function<bool(EhSolverCancelCheck)> cancelled);
+#endif
+template bool Equihash<144,5>::IsValidSolution(const eh_HashState& base_state, std::vector<unsigned char> soln);
+
+// Explicit instantiations for Equihash<192,7>
+template int Equihash<192,7>::InitialiseState(eh_HashState& base_state, const char* personalizationString);
+#ifdef ENABLE_MINING
+template bool Equihash<192,7>::BasicSolve(const eh_HashState& base_state,
+                                         const std::function<bool(std::vector<unsigned char>)> validBlock,
+                                         const std::function<bool(EhSolverCancelCheck)> cancelled);
+template bool Equihash<192,7>::OptimisedSolve(const eh_HashState& base_state,
+                                             const std::function<bool(std::vector<unsigned char>)> validBlock,
+                                             const std::function<bool(EhSolverCancelCheck)> cancelled);
+#endif
+template bool Equihash<192,7>::IsValidSolution(const eh_HashState& base_state, std::vector<unsigned char> soln);
+
 // Explicit instantiations for Equihash<96,5>
 template int Equihash<96,5>::InitialiseState(eh_HashState& base_state, const char* personalizationString);
 #ifdef ENABLE_MINING
@@ -816,6 +817,18 @@ template bool Equihash<96,5>::OptimisedSolve(const eh_HashState& base_state,
                                              const std::function<bool(EhSolverCancelCheck)> cancelled);
 #endif
 template bool Equihash<96,5>::IsValidSolution(const eh_HashState& base_state, std::vector<unsigned char> soln);
+
+// Explicit instantiations for Equihash<96,3>
+template int Equihash<96,3>::InitialiseState(eh_HashState& base_state, const char* personalizationString);
+#ifdef ENABLE_MINING
+template bool Equihash<96,3>::BasicSolve(const eh_HashState& base_state,
+                                         const std::function<bool(std::vector<unsigned char>)> validBlock,
+                                         const std::function<bool(EhSolverCancelCheck)> cancelled);
+template bool Equihash<96,3>::OptimisedSolve(const eh_HashState& base_state,
+                                             const std::function<bool(std::vector<unsigned char>)> validBlock,
+                                             const std::function<bool(EhSolverCancelCheck)> cancelled);
+#endif
+template bool Equihash<96,3>::IsValidSolution(const eh_HashState& base_state, std::vector<unsigned char> soln);
 
 // Explicit instantiations for Equihash<48,5>
 template int Equihash<48,5>::InitialiseState(eh_HashState& base_state, const char* personalizationString);

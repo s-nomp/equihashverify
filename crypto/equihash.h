@@ -1,5 +1,7 @@
 // Copyright (c) 2016 Jack Grigg
 // Copyright (c) 2016 The Zcash developers
+// Copyright (c) 2017-2018 The LitecoinZ developers
+// Copyright (c) 2018 The z-nomp developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -19,7 +21,6 @@
 #include <vector>
 
 #include <boost/static_assert.hpp>
-
 
 typedef crypto_generichash_blake2b_state eh_HashState;
 typedef uint32_t eh_index;
@@ -196,21 +197,24 @@ public:
 
 #include "equihash.tcc"
 
-static Equihash<144,5> Eh144_5;
 static Equihash<96,3> Eh96_3;
 static Equihash<200,9> Eh200_9;
 static Equihash<96,5> Eh96_5;
 static Equihash<48,5> Eh48_5;
+static Equihash<144,5> Eh144_5;
+static Equihash<192,7> Eh192_7;
 
 #define EhInitialiseState(n, k, base_state, personalizationString)  \
-    if (n == 96 && k == 3) {                 \
-        Eh96_3.InitialiseState(base_state, personalizationString);  \
+    if (n == 200 && k == 9) {				 \
+        Eh200_9.InitialiseState(base_state, personalizationString); \
     } else if (n == 144 && k == 5) {         \
         Eh144_5.InitialiseState(base_state, personalizationString); \
-    } else if (n == 200 && k == 9) {         \
-        Eh200_9.InitialiseState(base_state, personalizationString); \
+    } else if (n == 192 && k == 7) {         \
+        Eh192_7.InitialiseState(base_state, personalizationString); \
     } else if (n == 96 && k == 5) {          \
         Eh96_5.InitialiseState(base_state, personalizationString);  \
+    } else if (n == 96 && k == 3) {          \
+        Eh96_3.InitialiseState(base_state, personalizationString);  \
     } else if (n == 48 && k == 5) {          \
         Eh48_5.InitialiseState(base_state, personalizationString);  \
     } else {                                 \
@@ -222,14 +226,16 @@ inline bool EhBasicSolve(unsigned int n, unsigned int k, const eh_HashState& bas
                     const std::function<bool(std::vector<unsigned char>)> validBlock,
                     const std::function<bool(EhSolverCancelCheck)> cancelled)
 {
-    if (n == 96 && k == 3) {
-        return Eh96_3.BasicSolve(base_state, validBlock, cancelled);
+    if (n == 200 && k == 9) {
+        return Eh200_9.BasicSolve(base_state, validBlock, cancelled);
     } else if (n == 144 && k == 5) {
         return Eh144_5.BasicSolve(base_state, validBlock, cancelled);
-    } else if (n == 200 && k == 9) {
-        return Eh200_9.BasicSolve(base_state, validBlock, cancelled);
+    } else if (n == 192 && k == 7) {
+        return Eh192_7.BasicSolve(base_state, validBlock, cancelled);
     } else if (n == 96 && k == 5) {
         return Eh96_5.BasicSolve(base_state, validBlock, cancelled);
+    } else if (n == 96 && k == 3) {
+        return Eh96_3.BasicSolve(base_state, validBlock, cancelled);
     } else if (n == 48 && k == 5) {
         return Eh48_5.BasicSolve(base_state, validBlock, cancelled);
     } else {
@@ -248,14 +254,16 @@ inline bool EhOptimisedSolve(unsigned int n, unsigned int k, const eh_HashState&
                     const std::function<bool(std::vector<unsigned char>)> validBlock,
                     const std::function<bool(EhSolverCancelCheck)> cancelled)
 {
-    if (n == 96 && k == 3) {
-        return Eh96_3.OptimisedSolve(base_state, validBlock, cancelled);
+    if (n == 200 && k == 9) {
+        return Eh200_9.OptimisedSolve(base_state, validBlock, cancelled);
     } else if (n == 144 && k == 5) {
         return Eh144_5.OptimisedSolve(base_state, validBlock, cancelled);
-    } else if (n == 200 && k == 9) {
-        return Eh200_9.OptimisedSolve(base_state, validBlock, cancelled);
+    } else if (n == 192 && k == 7) {
+        return Eh192_7.OptimisedSolve(base_state, validBlock, cancelled);
     } else if (n == 96 && k == 5) {
         return Eh96_5.OptimisedSolve(base_state, validBlock, cancelled);
+    } else if (n == 96 && k == 3) {
+        return Eh96_3.OptimisedSolve(base_state, validBlock, cancelled);
     } else if (n == 48 && k == 5) {
         return Eh48_5.OptimisedSolve(base_state, validBlock, cancelled);
     } else {
@@ -272,14 +280,16 @@ inline bool EhOptimisedSolveUncancellable(unsigned int n, unsigned int k, const 
 #endif // ENABLE_MINING
 
 #define EhIsValidSolution(n, k, base_state, soln, ret)   \
-    if (n == 96 && k == 3) {                             \
-        ret = Eh96_3.IsValidSolution(base_state, soln);  \
+    if (n == 200 && k == 9) {                    		 \
+        ret = Eh200_9.IsValidSolution(base_state, soln); \
     } else if (n == 144 && k == 5) {                     \
         ret = Eh144_5.IsValidSolution(base_state, soln); \
-    } else if (n == 200 && k == 9) {                     \
-        ret = Eh200_9.IsValidSolution(base_state, soln); \
+    } else if (n == 192 && k == 7) {                     \
+        ret = Eh192_7.IsValidSolution(base_state, soln); \
     } else if (n == 96 && k == 5) {                      \
         ret = Eh96_5.IsValidSolution(base_state, soln);  \
+    } else if (n == 96 && k == 3) {                      \
+        ret = Eh96_3.IsValidSolution(base_state, soln);  \
     } else if (n == 48 && k == 5) {                      \
         ret = Eh48_5.IsValidSolution(base_state, soln);  \
     } else {                                             \
