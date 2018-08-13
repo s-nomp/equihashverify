@@ -21,7 +21,7 @@ int verifyEH(const char *hdr, const std::vector<unsigned char> &soln, const char
 
     bool isValid;
     EhIsValidSolution(N, K, state, soln, isValid);
-  
+
 	return isValid;
 }
 
@@ -39,7 +39,7 @@ void Verify(const v8::FunctionCallbackInfo<Value>& args) {
 
     if (!args[3]->IsInt32() || !args[4]->IsInt32()) {
         isolate->ThrowException(
-            Exception::TypeError(String::NewFromUtf8(isolate, "Third and fourth parameters should be equihash parameters (n, k)"))
+            Exception::TypeError(String::NewFromUtf8(isolate, "Fourth and fifth parameters should be equihash parameters (n, k)"))
         );
 
         return;
@@ -78,7 +78,7 @@ void Verify(const v8::FunctionCallbackInfo<Value>& args) {
     String::Utf8Value str(args[2]);
     const char* personalizationString = ToCString(str);
 
-    // Validate for N, K (3rd and 4th parameters)
+    // Validate for N, K (4th and 5th parameters)
     bool result = verifyEH(
         hdr,
         vecSolution,
