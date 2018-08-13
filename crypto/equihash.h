@@ -1,7 +1,7 @@
 // Copyright (c) 2016 Jack Grigg
 // Copyright (c) 2016 The Zcash developers
 // Copyright (c) 2017-2018 The LitecoinZ developers
-// Copyright (c) 2018 The z-nomp developers
+// Copyright (c) 2018 The s-nomp developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
