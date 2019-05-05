@@ -1,6 +1,6 @@
 {
     "name": "equihashverify",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "description": "function to check whether an Equihash solution is valid",
     "main": "equihashverify",
     "scripts": {
@@ -21,7 +21,8 @@
         "cronic",
         "egyptianbman",
         "LitecoinZ",
-        "s-nomp developers"
+        "s-nomp developers",
+        "coinblockers"
     ],
     "license": "MIT",
     "bugs": {
