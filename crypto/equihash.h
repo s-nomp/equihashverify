@@ -166,12 +166,11 @@ class Equihash
 {
 private:
     BOOST_STATIC_ASSERT(K < N);
-    BOOST_STATIC_ASSERT(N % 8 == 0);
     BOOST_STATIC_ASSERT((N/(K+1)) + 1 < 8*sizeof(eh_index));
 
 public:
     enum : size_t { IndicesPerHashOutput=512/N };
-    enum : size_t { HashOutput=IndicesPerHashOutput*N/8 };
+    enum : size_t { HashOutput=IndicesPerHashOutput*((N+7)/8) };
     enum : size_t { CollisionBitLength=N/(K+1) };
     enum : size_t { CollisionByteLength=(CollisionBitLength+7)/8 };
     enum : size_t { HashLength=(K+1)*CollisionByteLength };
@@ -203,10 +202,14 @@ static Equihash<96,5> Eh96_5;
 static Equihash<48,5> Eh48_5;
 static Equihash<144,5> Eh144_5;
 static Equihash<192,7> Eh192_7;
+static Equihash<125,4> Eh125_4;
+
 
 #define EhInitialiseState(n, k, base_state, personalizationString)  \
     if (n == 200 && k == 9) {				 \
         Eh200_9.InitialiseState(base_state, personalizationString); \
+    } else if (n == 125 && k == 4) {         \
+        Eh125_4.InitialiseState(base_state, personalizationString); \
     } else if (n == 144 && k == 5) {         \
         Eh144_5.InitialiseState(base_state, personalizationString); \
     } else if (n == 192 && k == 7) {         \
@@ -228,6 +231,8 @@ inline bool EhBasicSolve(unsigned int n, unsigned int k, const eh_HashState& bas
 {
     if (n == 200 && k == 9) {
         return Eh200_9.BasicSolve(base_state, validBlock, cancelled);
+    } else if (n == 125 && k == 4) {
+        return Eh125_4.BasicSolve(base_state, validBlock, cancelled);
     } else if (n == 144 && k == 5) {
         return Eh144_5.BasicSolve(base_state, validBlock, cancelled);
     } else if (n == 192 && k == 7) {
@@ -256,6 +261,8 @@ inline bool EhOptimisedSolve(unsigned int n, unsigned int k, const eh_HashState&
 {
     if (n == 200 && k == 9) {
         return Eh200_9.OptimisedSolve(base_state, validBlock, cancelled);
+    } else if (n == 125 && k == 4) {
+        return Eh125_4.OptimisedSolve(base_state, validBlock, cancelled);
     } else if (n == 144 && k == 5) {
         return Eh144_5.OptimisedSolve(base_state, validBlock, cancelled);
     } else if (n == 192 && k == 7) {
@@ -282,6 +289,8 @@ inline bool EhOptimisedSolveUncancellable(unsigned int n, unsigned int k, const 
 #define EhIsValidSolution(n, k, base_state, soln, ret)   \
     if (n == 200 && k == 9) {                    		 \
         ret = Eh200_9.IsValidSolution(base_state, soln); \
+    } else if (n == 125 && k == 4) {                     \
+        ret = Eh125_4.IsValidSolution(base_state, soln); \
     } else if (n == 144 && k == 5) {                     \
         ret = Eh144_5.IsValidSolution(base_state, soln); \
     } else if (n == 192 && k == 7) {                     \
