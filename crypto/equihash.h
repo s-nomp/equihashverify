@@ -14,6 +14,7 @@
 #include "sodium.h"
 
 #include <cstring>
+#include <stdexcept>
 #include <exception>
 #include <functional>
 #include <memory>
